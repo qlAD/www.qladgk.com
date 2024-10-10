@@ -1,15 +1,17 @@
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { SectionButton } from '@/components/sections/SectionButton';
 import SectionContent from '@/components/sections/SectionContent';
 import SectionTitle from '@/components/sections/SectionTitle';
 
+import { useAnimateContent } from '@/hooks/useAnimateContent';
+
 import TodoItem from '@/contents/index/Cards/TodoItem';
 
 import type { TodoItemState } from '@/contents/index/Cards/TodoItem';
 
-type Content = {
+export type Content = {
   state: TodoItemState;
   shows: Array<TodoItemState>;
   title: string;
@@ -44,11 +46,11 @@ const content: Array<Content> = [
 ];
 
 function CleanIntuitive() {
-  const [currentState, setCurrentState] = useState<Content | null>(null);
-
+  const { currentState, setCurrentState, setIsUserClick } =
+    useAnimateContent(content);
   return (
     <>
-      <header className={clsx('mb-8')}>
+      <header className={clsx('mb-4')}>
         <SectionTitle
           title="引人注目、现代而简约的设计。"
           caption="简洁直观"
@@ -56,9 +58,12 @@ function CleanIntuitive() {
         />
       </header>
       <SectionContent>
-        <div className={clsx('flex', 'lg:gap-12')}>
+        <div className={clsx('flex flex-col gap-8 lg:flex-row', 'lg:gap-12')}>
           <div
-            className={clsx('-mt-8 hidden flex-1 flex-col gap-3', 'lg:flex')}
+            className={clsx(
+              '-mt-8 flex flex-1 flex-row gap-1 lg:flex-col lg:gap-3',
+              'lg:flex'
+            )}
           >
             {content.map((item, i) => (
               <SectionButton
@@ -67,15 +72,28 @@ function CleanIntuitive() {
                 description={item.description}
                 icon={i + 1}
                 active={currentState?.state === item.state}
-                onClick={() => setCurrentState(item)}
+                onClick={() => {
+                  setCurrentState(item);
+                  setIsUserClick(true);
+                }}
               />
             ))}
           </div>
+          <p
+            className={clsx(
+              'text-slate-600',
+              'dark:text-slate-400',
+              'text-center',
+              'lg:hidden'
+            )}
+          >
+            {currentState?.description}
+          </p>
           <div
             className={clsx('relative flex flex-1 items-center justify-center')}
           >
             <div
-              className={clsx('-mt-8 flex gap-4', 'md:gap-6 lg:top-8 lg:mt-0')}
+              className={clsx('mt-0 flex gap-4', 'md:gap-6 lg:top-8 lg:mt-0')}
             >
               <div>
                 <TodoItem

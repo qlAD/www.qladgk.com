@@ -19,9 +19,7 @@ function Head({
 }: HeadProps) {
   const currentUrl = useCurrentUrl();
 
-  const htmlTitle = overrideTitle
-    ? title
-    : `${title} — Enji · Front-End Developer`;
+  const htmlTitle = overrideTitle ? title : `${title} — qlAD的技术笔记`;
 
   return (
     <NextHead>
@@ -36,18 +34,16 @@ function Head({
       <meta property="og:image" content={ogImage} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content={`Image with "${title}" text.`} />
+      <meta property="og:image:alt" content={`带有 "${title}" 文本的图片`} />
 
-      {/* twitter card */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@enjidev" />
-      <meta name="twitter:creator" content="@enjidev" />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={ogImage} />
-      <meta name="twitter:image:alt" content={`Image with "${title}" text.`} />
+      {/* 分享 */}
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="qlAD的技术笔记" />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" content={currentUrl} />
 
-      {/* structured data */}
+      {/* 结构化数据 */}
       {structuredData && (
         <script type="application/ld+json">{structuredData}</script>
       )}

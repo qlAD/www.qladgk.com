@@ -155,7 +155,7 @@ function Reactions({
         <div className={clsx('flex flex-col items-center gap-2')}>
           <EmojiReaction
             disabled={CLAPPING_QUOTA <= 0}
-            title="Claps"
+            title="鼓掌"
             defaultImage="/assets/emojis/clapping-hands.png"
             animatedImage="/assets/emojis/clapping-hands-animated.png"
             disabledImage="/assets/emojis/love-you-gesture.png"
@@ -168,7 +168,7 @@ function Reactions({
         <div className={clsx('flex flex-col items-center gap-2')}>
           <EmojiReaction
             disabled={AMAZED_QUOTA <= 0}
-            title="Wow"
+            title="哇"
             defaultImage="/assets/emojis/astonished-face.png"
             animatedImage="/assets/emojis/astonished-face-animated.png"
             disabledImage="/assets/emojis/star-struck.png"
@@ -181,7 +181,7 @@ function Reactions({
         <div className={clsx('flex flex-col items-center gap-2')}>
           <EmojiReaction
             disabled={THINKING_QUOTA <= 0}
-            title="Hmm"
+            title="疑惑"
             defaultImage="/assets/emojis/face-with-monocle.png"
             animatedImage="/assets/emojis/face-with-monocle-animated.png"
             disabledImage="/assets/emojis/nerd-face.png"

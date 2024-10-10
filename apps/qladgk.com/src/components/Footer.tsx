@@ -1,11 +1,7 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 
-import {
-  BilibiliIcon,
-  ExternalLink,
-  GitHubIcon,
-} from '@/components/Icons';
+import { BilibiliIcon, ExternalLink, GitHubIcon } from '@/components/Icons';
 
 import dayjs from '@/utils/dayjs';
 
@@ -27,12 +23,11 @@ function LastUpdate() {
         rel="noreferrer nofollow"
         className={clsx('hover:underline')}
       >
-        <span>查看 GitHub 上的最新更新</span>
+        <span>查看 GitHub 更新</span>
       </a>
     </div>
   );
 }
-
 
 function CCLicense() {
   return (
@@ -40,11 +35,15 @@ function CCLicense() {
       target="_blank"
       title="非转载内容的CC声明：署名-非商业性使用-禁止演绎 4.0 国际 (CC BY-NC-ND 4.0)"
       href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-hans"
-      className={clsx('hover:underline')} rel="noreferrer"
+      className={clsx('hover:underline')}
+      rel="noreferrer"
     >
-      <i className="cc cc-cc" />&nbsp;
-      <i className="cc cc-by" />&nbsp;
-      <i className="cc cc-nc" />&nbsp;
+      <i className="cc cc-cc" />
+      &nbsp;
+      <i className="cc cc-by" />
+      &nbsp;
+      <i className="cc cc-nc" />
+      &nbsp;
       <i className="cc cc-nd" />
     </a>
   );
@@ -139,7 +138,8 @@ function FooterDescription() {
         关于我
       </div>
       <p className={clsx('mb-4 font-normal leading-relaxed')}>
-        我是 qlAD, 一个小小的 <strong>计算机爱好者</strong> ，致力于专研改变世界的代码。
+        我是 qlAD, 一个小小的 <strong>计算机爱好者</strong>{' '}
+        ，致力于专研改变世界的代码。
       </p>
       <ul className={clsx('-ml-2 flex gap-1')}>
         <li>
@@ -261,9 +261,27 @@ function Footer() {
           <div className={clsx('font-semibold')}>
             &copy; 2020 - {dayjs().format('YYYY')}, qlADgk.com 版权所有
             <div>
-              <span>ICP 备案号: <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">陕ICP备2024050194号</a></span>
-              <br/>
-              <span>公安备案号: <a href="http://www.mps.gov.cn/" target="_blank" rel="noopener noreferrer">陕公网安备 xxxx号</a></span>
+              <span>
+                ICP 备案号:{' '}
+                <a
+                  href="https://beian.miit.gov.cn/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  陕ICP备2024050194号
+                </a>
+              </span>
+              <br />
+              <span>
+                公安备案号:{' '}
+                <a
+                  href="http://www.mps.gov.cn/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  陕公网安备 xxxx号
+                </a>
+              </span>
             </div>
           </div>
           <div className={clsx('text-slate-500', 'dark:text-slate-400')}>

@@ -102,7 +102,7 @@ function ShareButton({ onItemClick = () => {} }: ShareButtonProps) {
       {({ open }) => (
         <>
           <Menu.Button
-            title="Share"
+            title="分享"
             aria-label="Share"
             className={clsx(
               'relative z-10 flex h-10 w-10 items-center justify-center rounded-full bg-slate-200',
@@ -128,9 +128,9 @@ function ShareButton({ onItemClick = () => {} }: ShareButtonProps) {
                   'py-3 px-4 text-center text-[13px] text-lg font-bold'
                 )}
               >
-                Share this on
+                分享
               </div>
-              <Menu.Item>
+              {/* <Menu.Item>
                 {({ active }) => (
                   <ShareItemLink
                     active={active}
@@ -144,7 +144,7 @@ function ShareButton({ onItemClick = () => {} }: ShareButtonProps) {
                     </span>
                   </ShareItemLink>
                 )}
-              </Menu.Item>
+              </Menu.Item> */}
               <div
                 className={clsx(
                   'border-divider-light my-2 border-t',
@@ -155,7 +155,7 @@ function ShareButton({ onItemClick = () => {} }: ShareButtonProps) {
                 {({ active }) => (
                   <ShareItemButton active={active} onClick={handleCopy}>
                     <NoteIcon className={clsx('h-4 w-4')} />
-                    Copy link
+                    复制链接
                   </ShareItemButton>
                 )}
               </Menu.Item>

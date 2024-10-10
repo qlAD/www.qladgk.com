@@ -15,11 +15,11 @@ interface TodoItemProps {
 
 function TodoItem({
   state,
-  title = 'Create Documentations',
-  description = 'It is good to create early documentation for our new library.',
+  title = '创建文档',
+  description = '为我们的新图书馆创建早期文档是很好的。',
   date = '10:00 AM · Tomorrow',
-  tag1 = 'Docs',
-  tag2 = 'Support',
+  tag1 = '文档',
+  tag2 = '支持',
 }: TodoItemProps) {
   return (
     <div

@@ -1,8 +1,10 @@
 import clsx from 'clsx';
 import { m, useReducedMotion } from 'framer-motion';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 import { DocumentIcon } from '@/components/Icons';
+import AccentDemo from '@/components/mdx/AccentDemo';
 
 const animation = {
   hide: {
@@ -20,14 +22,35 @@ interface HeaderCtaProps {
   isFreeAnimationDuration?: number;
 }
 
-function ButtonContactMe() {
+function ButtonContactMe({ onMouseEnter, onMouseLeave }) {
   return (
     <Link
       href="/work/contact"
-      className={clsx('button button--solid min-w-[128px]', 'md:button--big')}
+      className={clsx(
+        'button button--solid min-w-[128px]',
+        'shadow',
+        'md:button--big'
+      )}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       联系我
     </Link>
+  );
+}
+
+function ChangeColor() {
+  return (
+    <button
+      type="button"
+      className={clsx(
+        'button button--solid',
+        'shadow',
+        'md:button--big md:my-0 md:inline-block'
+      )}
+    >
+      <AccentDemo />
+    </button>
   );
 }
 
@@ -40,7 +63,7 @@ function ButtonResume() {
       className={clsx('button button--ghost px-2', 'md:button--big md:px-2')}
     >
       <DocumentIcon className={clsx('h-5 w-5')} />
-      RESUME
+      关于我
     </a>
   );
 }
@@ -68,7 +91,7 @@ function AvailableForHire() {
           )}
         />
       </span>
-      AVAILABLE FOR HIRE
+      当前在线
     </div>
   );
 }
@@ -78,6 +101,16 @@ function HeaderCta({
   isFreeAnimationDuration = 4,
 }: HeaderCtaProps) {
   const shouldReduceMotion = useReducedMotion();
+  const [hovered, setHovered] = useState(false);
+  const [isAvailableVisible, setIsAvailableVisible] = useState(true);
+
+  useEffect(() => {
+    if (hovered) {
+      setIsAvailableVisible(true);
+    } else {
+      setIsAvailableVisible(false);
+    }
+  }, [hovered]);
 
   let isFreeVariants = {
     hide: {
@@ -103,42 +136,72 @@ function HeaderCta({
     };
   }
 
+  const handleMouseEnter = () => {
+    setHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setHovered(false);
+  };
+
   return (
-    <m.div className={clsx('flex gap-2')} initial="hide" animate="show">
-      <m.div
-        className={clsx('relative z-20')}
-        variants={animation}
-        transition={{ delay: 0.4 }}
-      >
-        <ButtonContactMe />
-      </m.div>
-      {isFree ? (
+    <>
+      <m.div className={clsx('flex gap-2')} initial="hide" animate="show">
         <m.div
+          className={clsx('relative z-20')}
           variants={animation}
-          transition={{ delay: 2.8 }}
-          className={clsx('relative z-10')}
+          transition={{ delay: 0.4 }}
         >
+          <ButtonContactMe
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          />
+        </m.div>
+        {isAvailableVisible ? (
           <m.div
-            variants={isFreeVariants}
-            transition={{ delay: isFreeAnimationDuration + 1.5, duration: 0.4 }}
+            variants={animation}
+            transition={{ delay: 2.8 }}
+            className={clsx('relative z-10')}
           >
-            <AvailableForHire />
+            <m.div
+              variants={isFreeVariants}
+              transition={{
+                delay: isFreeAnimationDuration + 1.5,
+                duration: 0.4,
+              }}
+            >
+              <AvailableForHire />
+            </m.div>
+            <m.div
+              className={clsx('absolute top-0 left-0')}
+              initial={{ x: -48, opacity: 0, pointerEvents: 'none' }}
+              animate={{ x: 0, opacity: 1, pointerEvents: 'auto' }}
+              transition={{
+                delay: isFreeAnimationDuration + 1.6,
+                duration: 0.4,
+              }}
+            >
+              <ButtonResume />
+            </m.div>
           </m.div>
+        ) : (
           <m.div
-            className={clsx('absolute top-0 left-0')}
-            initial={{ x: -48, opacity: 0, pointerEvents: 'none' }}
-            animate={{ x: 0, opacity: 1, pointerEvents: 'auto' }}
-            transition={{ delay: isFreeAnimationDuration + 1.6, duration: 0.4 }}
+            variants={animation}
+            transition={{ delay: 0.5, duration: 0.4 }}
           >
             <ButtonResume />
           </m.div>
-        </m.div>
-      ) : (
-        <m.div variants={animation} transition={{ delay: 0.5 }}>
-          <ButtonResume />
-        </m.div>
-      )}
-    </m.div>
+        )}
+      </m.div>
+      <m.div
+        className={clsx('top-20 mx-0')}
+        initial={{ y: 40, opacity: 0, pointerEvents: 'none' }}
+        animate={{ y: 10, opacity: 1, pointerEvents: 'auto' }}
+        transition={{ delay: 2, duration: 0.5 }}
+      >
+        <ChangeColor />
+      </m.div>
+    </>
   );
 }
 

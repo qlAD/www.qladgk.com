@@ -20,15 +20,15 @@ export const formatDateRelative = (date: string) => {
     }
 
     if (days > 1) {
-      return `${days} days ago`;
+      return `${days} 天前`;
     }
 
     if (days === 1) {
-      return `Yesterday`;
+      return `昨天`;
     }
 
     if (days === 0) {
-      return `Today`;
+      return `今天`;
     }
   }
 

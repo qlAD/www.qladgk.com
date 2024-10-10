@@ -59,8 +59,8 @@ function TableOfContents({ items = [] }: TableOfContensProps) {
           className={clsx('text-slate-700', 'dark:text-slate-300')}
           id="table-of-contents"
         >
-          <span className={clsx('lg:hidden', 'xl:inline')}>Table of </span>
-          Contents
+          {/* <span className={clsx('lg:hidden', 'xl:inline')}>Table of </span> */}
+          目录
         </h2>
         <m.div
           initial={{ x: 16, opacity: 0 }}
@@ -75,7 +75,7 @@ function TableOfContents({ items = [] }: TableOfContensProps) {
             tabIndex={isScrolled ? 0 : -1}
             onClick={handleScrollToTopClick}
           >
-            scroll to top
+            回到顶部
           </a>
         </m.div>
       </div>

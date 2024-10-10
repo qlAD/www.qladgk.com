@@ -41,12 +41,9 @@ function SkipNavigation({ skipTableOfContents = true }: SkipNavigationProps) {
         )}
       >
         {skipTableOfContents && (
-          <SkipNavigationLink
-            slug="#table-of-contents"
-            title="Jump to Table of Contents"
-          />
+          <SkipNavigationLink slug="#table-of-contents" title="跳转到目录" />
         )}
-        <SkipNavigationLink slug="#main-contents" title="Jump to Content" />
+        <SkipNavigationLink slug="#main-contents" title="跳转到内容" />
       </div>
     </Portal>
   );

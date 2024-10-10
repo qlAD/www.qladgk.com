@@ -1,8 +1,9 @@
 {
+  "name": "qladgk.com",
   "private": true,
   "scripts": {
     "build": "turbo run build",
-    "dev": "HTTP_PROXY=http://127.0.0.1:7897 turbo run dev --parallel",
+    "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "clean": "turbo run clean",
     "format": "prettier --write ."

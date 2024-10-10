@@ -6,6 +6,7 @@ import PostPreview from '@/contents/blog/PostPreview';
 
 import type { TPostFrontMatter } from '@/types';
 
+// 置顶文章
 const PINNED_POST = 'the-2024-retrospective';
 
 export type BlogContentsProps = {
