@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function AccentDemo() {
   const accents = [
@@ -12,16 +12,19 @@ function AccentDemo() {
     'default',
   ] as const;
 
-  const [accent, setAccent] = useState<(typeof accents)[number]>('default');
+  const [accent, setAccent] = useState<(typeof accents)[number] | null>(null);
+
+  useEffect(() => {
+    const initialAccent = 'default';
+    setAccent(initialAccent);
+    document.documentElement.setAttribute('data-accent', initialAccent);
+  }, []);
 
   const handleClick = () => {
-    const newAccent = accents[accents.indexOf(accent) + 1] || accents[0];
-
-    // change the html data-accent
-    document.documentElement.setAttribute('data-accent', newAccent);
-
-    // set new active accent
+    if (accent === null) return;
+    const newAccent = accents[(accents.indexOf(accent) + 1) % accents.length];
     setAccent(newAccent);
+    document.documentElement.setAttribute('data-accent', newAccent);
   };
 
   const getButtonText = (color: (typeof accents)[number]): string => {
@@ -42,6 +45,8 @@ function AccentDemo() {
         return `✦ 想要换个颜色吗？✦`;
     }
   };
+
+  if (accent === null) return null;
 
   return (
     <div>
@@ -101,9 +106,9 @@ function AccentDemo() {
           }
         `}
       </style>
-      <a className={clsx('button')} onClick={handleClick}>
+      <button type="button" className={clsx('button')} onClick={handleClick}>
         {getButtonText(accent)}
-      </a>
+      </button>
     </div>
   );
 }

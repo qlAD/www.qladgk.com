@@ -17,12 +17,12 @@ const animation = {
   },
 };
 
-interface HeaderCtaProps {
-  isFree?: boolean;
-  isFreeAnimationDuration?: number;
+interface ButtonContactMeProps {
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
 }
 
-function ButtonContactMe({ onMouseEnter, onMouseLeave }) {
+function ButtonContactMe({ onMouseEnter, onMouseLeave }: ButtonContactMeProps) {
   return (
     <Link
       href="/work/contact"
@@ -96,7 +96,13 @@ function AvailableForHire() {
   );
 }
 
+interface HeaderCtaProps {
+  isFree?: boolean;
+  isFreeAnimationDuration?: number;
+}
+
 function HeaderCta({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   isFree = true,
   isFreeAnimationDuration = 4,
 }: HeaderCtaProps) {
@@ -105,11 +111,7 @@ function HeaderCta({
   const [isAvailableVisible, setIsAvailableVisible] = useState(true);
 
   useEffect(() => {
-    if (hovered) {
-      setIsAvailableVisible(true);
-    } else {
-      setIsAvailableVisible(false);
-    }
+    setIsAvailableVisible(hovered);
   }, [hovered]);
 
   let isFreeVariants = {

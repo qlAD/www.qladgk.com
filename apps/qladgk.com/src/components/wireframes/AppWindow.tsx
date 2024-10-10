@@ -11,7 +11,12 @@ interface BrowserTabProps {
   onClick?: () => void; // 添加 onClick 属性
 }
 
-function BrowserTab({ icon, title, isActive, onClick }: BrowserTabProps) {
+function BrowserTab({
+  icon,
+  title,
+  isActive,
+  onClick = () => {},
+}: BrowserTabProps) {
   return (
     <div
       className={clsx('flex h-6 items-center truncate rounded-lg', [
@@ -23,7 +28,12 @@ function BrowserTab({ icon, title, isActive, onClick }: BrowserTabProps) {
           : ['bg-slate-200/50 text-slate-500', 'dark:bg-slate-100/5'],
       ])}
       style={{ width: 200 }}
+      role="button" // 设置角色为按钮
+      tabIndex={0} // 使其可聚焦
       onClick={onClick} // 将 onClick 绑定到 div
+      onKeyPress={(e) => {
+        if (e.key === 'Enter') onClick();
+      }} // 处理键盘事件
     >
       <div className={clsx('flex w-full gap-2 px-2 text-xs')}>
         {icon}
@@ -43,7 +53,7 @@ function AppWindow({
   type = 'app',
   browserTabs = [],
 }: PropsWithChildren<AppWindowProps>) {
-  const isWithBrowserTabs = type === 'browser' && browserTabs;
+  const isWithBrowserTabs = type === 'browser' && browserTabs.length > 0;
 
   return (
     <div

@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
 
 import { SectionButton } from '@/components/sections/SectionButton';
 import SectionContent from '@/components/sections/SectionContent';

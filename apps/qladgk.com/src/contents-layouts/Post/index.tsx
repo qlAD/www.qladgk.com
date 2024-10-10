@@ -13,6 +13,10 @@ import PostMeta from '@/contents-layouts/Post/PostMeta';
 
 import type { TPostFrontMatter, TTableOfContents } from '@/types';
 
+declare const twikoo: {
+  init: (options: { envId: string; el: string }) => void;
+};
+
 interface PostProps {
   frontMatter: TPostFrontMatter;
   tableOfContents: TTableOfContents;
@@ -23,7 +27,6 @@ function Post({
   tableOfContents,
   children = null,
 }: PropsWithChildren<PostProps>) {
-  // get og image urls
   const postOgImages = getPostOgImageUrl({
     category: caption || category,
     title,
@@ -32,7 +35,6 @@ function Post({
     tags,
   });
 
-  // get structured data
   const structuredData = getPostStructuredData({
     title,
     dateModified: date,
@@ -41,24 +43,20 @@ function Post({
   });
 
   useEffect(() => {
-    // 动态加载 Twikoo 脚本
     const script = document.createElement('script');
     script.src =
       'https://cdn.jsdelivr.net/npm/twikoo@1.6.39/dist/twikoo.nocss.js';
     script.async = true;
 
     script.onload = () => {
-      // 初始化 Twikoo
-      // 请将 '您的环境id' 替换为你的实际环境 ID
       twikoo.init({
         envId: 'https://twikoo.qladgk.com/.netlify/functions/twikoo',
-        el: '#tcomment', // 容器元素
+        el: '#tcomment',
       });
     };
 
     document.body.appendChild(script);
 
-    // 清理函数以移除脚本
     return () => {
       document.body.removeChild(script);
     };
